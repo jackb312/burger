@@ -1,4 +1,6 @@
+//imports connection.js
 var connection = require("../config/connection.js");
+//function that prints "?" into sql syntax
 function printQuestionMarks(num) {
     var arr = [];
     for (var i = 0; i < num; i++) {
@@ -6,6 +8,7 @@ function printQuestionMarks(num) {
     }
     return arr.toString();
 }
+//converts object key/value pairs into sql syntax
 function objToSql(ob) {
     var arr = [];
     for (var key in ob) {
@@ -20,6 +23,7 @@ function objToSql(ob) {
     return arr.toString();
 }
 var orm = {
+    //displays all burgers in db
     selectAll: function(table, cb) {
         var queryString = "SELECT * FROM " + table + ";";
         connection.query(queryString, function(err, result) {
@@ -29,6 +33,7 @@ var orm = {
             cb(result);
         });
     },
+    //function that adds burger to sql with syntax
     insertOne: function(table, cols, vals, cb) {
         var queryString = "INSERT INTO " + table;
         queryString += " (";
@@ -45,6 +50,7 @@ var orm = {
             cb(result);
         });
     },
+    //function that updates burger devour status to sql syntax
     updateOne: function(table, objColVals, condition, cb) {
         var queryString = "UPDATE " + table;
         queryString += " SET ";
@@ -59,6 +65,7 @@ var orm = {
             cb(result);
         });
     },
+    //function that deletes burger from db using sql syntax
     deleteOne: function(table, condition, cb) {
         var queryString = "DELETE FROM " + table;
         queryString += " WHERE ";
@@ -72,4 +79,5 @@ var orm = {
         });
     }
 };
+//exports orm
 module.exports = orm;
